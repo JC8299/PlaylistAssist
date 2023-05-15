@@ -1,20 +1,23 @@
 const clientId = process.env.SPOTIFY_CLIENT_ID;
 // need to change this because window is for browser and this is serverside
 // const params = new URLSearchParams(window.location.search);
-const code = params.get("code");
 // need to change later
-const redirectURI = 'http://localhost:3000';
+const redirectUri = 'http://localhost:3000';
 const params = new URLSearchParams({
     response_type: 'code',
     client_id: clientId,
     scope: '',
-    redirect_uri: redirectURI,
+    redirect_uri: redirectUri,
 });
+// most of this file should not be in the api as I need to continue
+// using code to retain authorization
+const code = params.get("code");
 
 if(!code) {
     redirectToAuthCodeFlow(clientId);
 } else {
-    const accessToken = await getAccessToken(clientId);
+    // only valid for 1 hour
+    const accessToken = await getAccessToken(clientId, code);
 
     // need to change this to work with playlists
     const profile = await fetchProfile(accessToken);
@@ -25,18 +28,28 @@ export async function redirectToAuthCodeFlow(clientId) {
     // Redirect to Spotify authorization page
     const verifier = generateCodeVerifier(128);
     const challenge = await generateCodeChallenge(verifier);
+    let state = generateCodeVerifier(16);
+    let scope = 'user-read-private user-read-email';
 
     localStorage.setItem('verifier', verifier);
 
-    const params = new URLSearchParams();
-    params.append('client_id', clientId);
-    params.append('response_type', 'code');
-    // need to alter this from working with vite
-    params.append('redirect_uri', redirectURI);
-    // may need to change scope
-    params.append('scope', 'user-read-private user-read-email');
-    params.append('code_challenge_method', 'S256');
-    params.append('code_challenge', challenge);
+    const params = new URLSearchParams({
+        response_type: 'code',
+        client_id: clientId,
+        scope: scope,
+        redirect_uri: redirectUri,
+        state: state,
+        code_challenge_method: 'S256',
+        code_challenge: challenge
+    });
+    // params.append('client_id', clientId);
+    // params.append('response_type', 'code');
+    // // need to alter this from working with vite
+    // params.append('redirect_uri', redirectUri);
+    // // may need to change scope
+    // params.append('scope', );
+    // params.append('code_challenge_method', 'S256');
+    // params.append('code_challenge', challenge);
 
     document.location = `https://accounts.spotify.com/authorize?${params.toString()}`;
 }
@@ -54,25 +67,36 @@ function generateCodeVerifier(length) {
 
 // may need to replace btoa
 async function generateCodeChallenge(codeVerifier) {
-    const data = new TextEncoder().encode(codeVerifier);
-    const digest = await window.crypto.subtle.digest('SHA-256', data);
-    return btoa(String.fromCharCode.apply(null, [...new Uint8Array(digest)]))
+    function base64encode(string) {
+        return btoa(String.fromCharCode.apply(null, new Uint8Array(string)))
         .replace(/\+/g, '-')
         .replace(/\//g, '_')
         .replace(/=+$/, '');
+    }
+
+    const data = new TextEncoder().encode(codeVerifier);
+    // maybe use node js crypto libraries to generate hash?
+    const digest = await window.crypto.subtle.digest('SHA-256', data);
+    return base64encode(digest);
 }
 
 async function getAccessToken(clientId, code) {
     // Get access token for code
     const verifier = localStorage.getItem('verifier');
 
-    const params = new URLSearchParams();
-    params.append('client_id', clientId);
-    params.append('grant_type', 'authorization_code');
-    params.append('code', code);
-    // same issue as previous uri
-    params.append('redirect_uri', redirectURI);
-    params.append('code_verifier', verifier);
+    const params = new URLSearchParams({
+        client_id: clientId,
+        grant_type: 'authorization_code',
+        code: code,
+        redirect_uri: redirectUri,
+        code_verifier: verifier
+    });
+    // params.append('client_id', clientId);
+    // params.append('grant_type', 'authorization_code');
+    // params.append('code', code);
+    // // same issue as previous uri
+    // params.append('redirect_uri', redirectUri);
+    // params.append('code_verifier', verifier);
 
     const result = fetch('https://accounts.spotify.com/api/token', {
         method: "POST",
@@ -80,7 +104,14 @@ async function getAccessToken(clientId, code) {
         body: params,
     });
 
-    const { access_token } = (await result).json();
+    // to refresh token, params needs to be:
+    // params = new URLSearchParams({
+    //     client_id: clientId,
+    //     grant_type: 'refresh_token',
+    //     refresh_token: 'refresh toekn returned from the authroization exchange',
+    // });
+
+    const { access_token } = await result.json();
     return access_token;
 }
 
