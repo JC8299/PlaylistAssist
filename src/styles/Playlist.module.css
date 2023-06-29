@@ -1,0 +1,43 @@
+.playlistContainer {
+    display: grid;
+    /* gap: 24px; */
+    gap: 16px;
+    padding: 8px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    /* grid-auto-columns: auto-fill;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: 0;
+    grid-template-rows: 1fr;
+    overflow-y: hidden; */
+    min-width: 372px;
+}
+
+@media (min-width: 640px) {
+    .playlistContainer {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 768px) {
+    .playlistContainer {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .playlistContainer {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+}
+
+/* @media (min-width: 1280px) {
+    .playlistContainer {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+} */
+
+/* @media (min-width: 1536px) {
+    .playlistContainer {
+        grid-template-columns: repeat(8, minmax(0, 1fr));
+    }
+} */

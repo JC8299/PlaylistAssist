@@ -17,11 +17,11 @@ const scopes = [
  */
 async function refreshAccessToken(token) {
     try {
+        // console.log('Refreshing token');
+
         const url =
             'https://accounts.spotify.com/api/token?' +
             new URLSearchParams({
-                client_id: process.env.SPOTIFY_CLIENT_ID,
-                client_Secret: process.env.SPOTIFY_CLIENT_SECRET,
                 grant_type: 'refresh_token',
                 refresh_token: token.refreshToken,
             });
@@ -29,6 +29,7 @@ async function refreshAccessToken(token) {
         const response = await fetch(url, {
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
+                "Authorization": "Basic " + (new Buffer.from(process.env.SPOTIFY_CLIENT_ID + ":" + process.env.SPOTIFY_CLIENT_SECRET).toString('base64'))
             },
             method: "POST",
         });
@@ -36,9 +37,12 @@ async function refreshAccessToken(token) {
         const refreshedTokens = await response.json();
 
         if (!response.ok) {
+            console.log(refreshedTokens);
             throw refreshedTokens;
         }
 
+        // console.log('Finishing refreshing token');
+        
         return {
             ...token,
             accessToken: refreshedTokens.access_token,
@@ -46,7 +50,7 @@ async function refreshAccessToken(token) {
             refreshToken: refreshedTokens.refresh_token ?? token.refreshToken, // Fall back to old refresh token
         };
     } catch (error) {
-        console.log(error);
+        console.log("Error refreshing access token", error);
 
         return {
             ...token,
@@ -78,10 +82,8 @@ export const authOptions = {
                     refreshToken: account.refresh_token,
                     user,
                 };
-            }
-
-            // Return previous token if the access token has not expired yet
-            if (Date.now() < token.accessTokenExpires) {
+            } else if (Date.now() < token.accessTokenExpires) {
+                // Return previous token if the access token has not expired yet
                 return token;
             }
 

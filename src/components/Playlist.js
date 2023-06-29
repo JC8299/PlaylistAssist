@@ -1,8 +1,11 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
+import Card from "./Card";
+import styles from "../styles/Playlist.module.css";
+
 function Playlist({ spotifyApi }) {
-    const {data: session } = useSession();
+    const { data: session } = useSession();
     const accessToken = session?.accessToken;
     const [playlists, setPlaylists] = useState([]);
     
@@ -18,14 +21,14 @@ function Playlist({ spotifyApi }) {
                     console.log('Error in getting user', error)
                 })
         ).then((data) => {
-            console.log('Playlists:', data.body);
             setPlaylists(
                 data.body.items.map((playlist) => {
                     return {
-                        uid: playlist.id,
+                        id: playlist.id,
                         name: playlist.name,
                         uri: playlist.uri,
                         playlistUrl: playlist.images[0].url,
+                        owner: playlist.owner.display_name,
                     };
                 })
             );
@@ -35,20 +38,20 @@ function Playlist({ spotifyApi }) {
     }, [accessToken]);
 
     return (
-        <div>
-            <ul>
-                {playlists
-                    .map((playlist) => (
-                        <li>
-                            <img
-                                src={playlist.playlistUrl}
-                                alt=""
-                            />
-                            <div>{playlist.name}</div>
-                        </li>
-                    ))
-                }
-            </ul>
+        <div className={styles.playlistContainer}>
+            {playlists
+                .map((playlist) => (
+                    <Card
+                        imageSrc={playlist.playlistUrl}
+                        imageAlt='Playlist Image'
+                        title={playlist.name}
+                        description={`${playlist.owner ? playlist.owner : ''}`}
+                        buttonText='Card Link'
+                        link=''
+                        key={playlist.id}
+                    />
+                ))
+            }
         </div>
     )
 }

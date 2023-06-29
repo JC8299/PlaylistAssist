@@ -2,18 +2,14 @@ import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 import Search from "./Search";
+import Box from "./Box";
+import Playlist from "./Playlist";
+import BodyHeader from "./BodyHeader";
 
 function Body({ spotifyApi }) {
     const { data: session } = useSession();
-    const { accessToken } = session;
     const [search, setSearch] = useState('');
     const [searchResults, setSearchResults] = useState([]);
-
-    useEffect(() => {
-        if (!accessToken) return;
-
-        spotifyApi.setAccessToken(accessToken);
-    }, [accessToken]);
 
     // This is done to search tracks from all tracks
     // Searching
@@ -38,20 +34,15 @@ function Body({ spotifyApi }) {
     // }, [search, accessToken]);
 
     return (
-        <section className="bg-black ml-24 py-4 space-y-8 md:max-w-6xl flex-grow md: mr-2.5">
-            <Search search={search} setSearch={setSearch} />
-            <div className="grid overflow-y-scroll scrollbar-hide h-96 py-4 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8 p-4"></div>
-            <div>
-                <div>User: {session.user.name}</div>
-                <div>Email: {session.user.email}</div>
-                <div>
-                    <img src={session.user.image} />
-                </div>
-                <button onClick={() => signOut({ redirect: false })}>
-                    Log Out
-                </button>
+        <div className="flex flex-col h-full">
+            <div className="h-full">
+                <Box className={"overflow-y-auto h-full"}>
+                    <BodyHeader search={search} setSearch={setSearch} />
+                    <Playlist spotifyApi={spotifyApi} />
+                    {/* <div className="grid overflow-y-scroll scrollbar-hide h-96 py-4 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8 p-4"></div> */}
+                </Box>
             </div>
-        </section>
+        </div>
     )
 }
 

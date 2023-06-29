@@ -3,10 +3,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 
-import { siteTitle } from '../components/layout';
 import Songs from '../lib/songs';
 import Loader from '@/components/Loader';
 import Dashboard from '@/components/Dashboard';
+import Card from '@/components/Card';
 
 // export const getServerSideProps = async ({ req, res }) => {
 //     try {
@@ -55,8 +55,8 @@ export default function Home() {
     return (
         <>
             <Head>
-                <title>{siteTitle}</title>
-                <link rel="icon" href="/favicon.ico" />
+                <title>Playlist Assist</title>
+                {/* <link rel="icon" href="/favicon.ico" /> */}
             </Head>
             <Dashboard />
         </>

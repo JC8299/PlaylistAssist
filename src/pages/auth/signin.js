@@ -22,11 +22,11 @@ function Signin({ providers }) {
         <div className="bg-black h-screen flex flex-col items-center pt-40 space-y-8">
             <Head>
                 <title>Login - Spotify</title>
-                <link rel="icon" href="/favicon.ico" />
             </Head>
 
             <Image
                 src="https://rb.gy/y9mwtb"
+                alt="Spotify"
                 height={250}
                 width={600}
                 style={{objectFit:"contain"}}
