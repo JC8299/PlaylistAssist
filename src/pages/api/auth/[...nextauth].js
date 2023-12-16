@@ -65,7 +65,7 @@ export const authOptions = {
         SpotifyProvider({
         clientId: process.env.SPOTIFY_CLIENT_ID,
         clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-        authorization: `https://accounts.spotify.com/authorize?scope=${scopes.join(',')}`,
+        authorization: `https://accounts.spotify.com/authorize?scope=${scopes.join(',')}&show_dialog=true`,
         }),
         // ...add more providers here
     ],

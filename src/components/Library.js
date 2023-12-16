@@ -1,4 +1,4 @@
-import { BiSolidPlaylist } from "react-icons/bi"
+import { RiPlayListFill } from "react-icons/ri"
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
@@ -56,7 +56,7 @@ function Library({ spotifyApi }) {
                         gap-x-2
                     "
                 >
-                    <BiSolidPlaylist className="text-neutral-400" size={22} />
+                    <RiPlayListFill className="text-neutral-400" size={22} />
                     <p className="text-neutral-400 font-medium text-md">Your Library</p>
                 </div>
             </div>

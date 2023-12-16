@@ -30,4 +30,11 @@ body {
   * {
     font-family: sans-serif, Helvetica Neue, Helvetica, Arial;
   }
+
+  .disableTextSelection {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
 }

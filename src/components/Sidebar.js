@@ -18,7 +18,7 @@ function Sidebar({ children, spotifyApi }) {
     }, [accessToken]);
 
     return (
-        <div className="flex h-full">
+        <div className="flex h-full disableTextSelection">
             <div
                 className="
                     hidden

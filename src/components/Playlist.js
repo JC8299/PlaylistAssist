@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 import Card from "./Card";
-import styles from "../styles/Playlist.module.css";
+import styles from "../styles/playlist.module.css";
 
 function Playlist({ spotifyApi }) {
     const { data: session } = useSession();
@@ -38,7 +38,8 @@ function Playlist({ spotifyApi }) {
     }, [accessToken]);
 
     return (
-        <div className={styles.playlistContainer}>
+        <div className={`
+            ${styles.playlistContainer}`}>
             {playlists
                 .map((playlist) => (
                     <Card

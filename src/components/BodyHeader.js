@@ -71,8 +71,8 @@ function BodyHeader({ search, setSearch }) {
                     <div className="flex flex-col grow-[.5] gap-2">
                         <Search search={search} setSearch={setSearch} />
                         <div className="flex flex-row gap-4 self-end">
-                            <div className="bg-[#232323] rounded-full p-2 w-24 h-8 flex justify-center items-center">Playlists</div>
-                            <div className="bg-[#232323] rounded-full p-2 w-24 h-8 flex justify-center items-center">Songs</div>
+                            <div className="bg-[#232323] rounded-full p-2 w-24 h-8 flex justify-center items-center disableTextSelection">Playlists</div>
+                            <div className="bg-[#232323] rounded-full p-2 w-24 h-8 flex justify-center items-center disableTextSelection">Songs</div>
                         </div>
                     </div>
                 </div>

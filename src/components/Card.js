@@ -1,4 +1,4 @@
-import styles from '../styles/Card.module.css';
+import styles from '../styles/card.module.css';
 
 
 function Card({
@@ -10,7 +10,7 @@ function Card({
     link,
 }) {
     return (
-        <div className={styles.cardContainer}>
+        <div className={styles.cardContainer+' disableTextSelection'}>
             <div className={styles.cardContent}>
                 <div className={styles.cardImageContainer}>
                     <img className={styles.cardImage}

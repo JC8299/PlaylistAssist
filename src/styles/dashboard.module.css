@@ -1,0 +1,23 @@
+.resizer {
+  width: 5px;
+}
+
+.resizer:hover .resizerBar {
+  opacity: 1;
+}
+
+.resizerBar {
+  background-color: #252525;
+  opacity: 0;
+  width: 1px;
+  height: 100%;
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  right: 0;
+  float: right;
+}
