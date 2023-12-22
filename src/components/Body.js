@@ -34,15 +34,11 @@ function Body({ spotifyApi }) {
     // }, [search, accessToken]);
 
     return (
-        <div className="flex flex-col h-full">
-            <div className="h-full">
-                <Box className={"overflow-y-auto h-full"}>
-                    <BodyHeader search={search} setSearch={setSearch} />
-                    <Playlist spotifyApi={spotifyApi} />
-                    {/* <div className="grid overflow-y-scroll scrollbar-hide h-96 py-4 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8 p-4"></div> */}
-                </Box>
-            </div>
-        </div>
+        <Box className={"h-full flex flex-col"}>
+            <BodyHeader search={search} setSearch={setSearch} />
+            <Playlist spotifyApi={spotifyApi} />
+            {/* <div className="grid overflow-y-scroll scrollbar-hide h-96 py-4 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-8 p-4"></div> */}
+        </Box>
     )
 }
 

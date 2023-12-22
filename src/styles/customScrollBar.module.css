@@ -1,0 +1,54 @@
+.customScrollbarContainer {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.customScrollbarContent::-webkit-scrollbar {
+  display: none;
+}
+
+.customScrollbarContent {
+  width: 100%;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  height: 100%;
+  overflow: auto;
+}
+
+.customScrollbarTrackAndThumb {
+  display: block;
+  position: absolute;
+  width: 12px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.customScrollbarTrack {
+  top: 0;
+  bottom: 0;
+  cursor: pointer;
+  position: absolute;
+  width: 100%;
+}
+
+.customScrollbarThumb {
+  position: absolute;
+  width: 100%;
+  background-color: grey;
+  transition: opacity 0.5s 0.8s;
+  opacity: 0%;
+}
+
+.customScrollbarThumb.animate,
+.customScrollbarThumb.mouseOver {
+  transition: opacity 0.5s;
+  opacity: 60%;
+}
+
+.customScrollbarThumb.mouseOver:hover,
+.customScrollbarThumb.grabbed {
+  transition: opacity 0.2s;
+  opacity: 80%;
+}
