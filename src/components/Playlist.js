@@ -13,7 +13,22 @@ function Playlist({ spotifyApi }) {
     const containerRef = useRef(null);
     const [cardWidth, setCardWidth] = useState(200);
     const minCardWidth = 150;
-    const maxCardWidth = 200;
+    const maxCardWidth = 250;
+
+    function findMinCardsPerRow(containerWidth) {
+        // padding is 24px each side
+        // gap is 16px
+        const gap = 16;
+        // subtract padding
+        const contentSpaceWidth = containerWidth-48;
+        let cards = 2;
+
+        while(contentSpaceWidth - gap*(cards-1) > minCardWidth * cards) {
+            cards++;
+        }
+
+        return cards-1;
+    }
 
     useEffect(() => {
         const container = containerRef.current;
@@ -21,16 +36,11 @@ function Playlist({ spotifyApi }) {
         if (container) {
             const resizeObserver = new ResizeObserver(() => {
                 const containerWidth = container.getBoundingClientRect().width;
+                let minCardsPerRow = findMinCardsPerRow(containerWidth);
 
-                let minCardsPerRow = 3;
-                if (containerWidth - 16 * 2 >= minCardWidth * 3) minCardsPerRow = 3;
-                if (containerWidth - 16 * 3 >= minCardWidth * 4) minCardsPerRow = 4;
-                if (containerWidth - 16 * 4 >= minCardWidth * 5) minCardsPerRow = 5;
-                if (containerWidth - 16 * 5 >= minCardWidth * 6) minCardsPerRow = 6;
-                console.log(minCardsPerRow);
-
-                const newMaxCardWidth = Math.floor(containerWidth / minCardsPerRow);
-
+                const newMaxCardWidth = Math.floor(
+                    (containerWidth-48-(16*(minCardsPerRow-1))) / minCardsPerRow
+                );
                 const finalMaxCardWidth = Math.min(Math.max(newMaxCardWidth, minCardWidth), maxCardWidth);
 
                 setCardWidth(finalMaxCardWidth);
@@ -51,7 +61,6 @@ function Playlist({ spotifyApi }) {
         spotifyApi.getUserPlaylists(
             spotifyApi.getMe()
                 .then((data) => {
-                    // console.log('Authenticated User:', data.body.display_name);
                     return data.body.display_name;
                 }, function(error) {
                     console.log('Error in getting user', error)

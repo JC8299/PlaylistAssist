@@ -1,15 +1,10 @@
 .cardContainer {
-  /* display: flex;
-  flex-direction: column;
-  position: relative; */
-
+  flex-grow: 1;
   background-color: #181818;
-  /* width: 30%;
-  max-width: 200px; */
+  min-width: 150px;
   padding: 16px;
   transition: background-color ease 0.3s;
   border-radius: 6px;
-  padding: 16px;
   cursor: pointer;
 }
 
@@ -28,7 +23,9 @@
   padding-bottom: 100%;
   position: relative;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-  margin-bottom: 16px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  overflow: hidden;
 }
 
 .cardImage {
@@ -43,8 +40,7 @@
 .cardText {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  min-height: 62px;
+  gap: 4px;
   overflow: hidden;
 }
 
@@ -60,7 +56,6 @@
 
 .cardDescription {
   color: #a7a7a7;
-  /* color: #989898; */
   font-weight: 400;
   font-size: 0.875rem;
   margin-top: 4px;

@@ -1,6 +1,5 @@
 import styles from '../styles/card.module.css';
 
-
 function Card({
     imageSrc,
     imageAlt,
@@ -8,9 +7,10 @@ function Card({
     description,
     buttonText,
     link,
+    width
 }) {
     return (
-        <div className={styles.cardContainer+' disableTextSelection'}>
+        <div className={styles.cardContainer+' disableTextSelection'} style={{maxWidth: `${width}px`}}>
             <div className={styles.cardContent}>
                 <div className={styles.cardImageContainer}>
                     <img className={styles.cardImage}
