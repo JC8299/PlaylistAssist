@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import styles from '../styles/card.module.css';
+import styles from '@/styles/card.module.css';
 
 function Card({
     imageSrc,

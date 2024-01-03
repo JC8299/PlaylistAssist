@@ -1,11 +1,13 @@
-import Box from "../../Box";
+import Box from "@/components/Box";
 import SidebarItem from "./SidebarItem";
 import Library from "./Library";
-import Logout from "../../Logout";
-import { getAuthenticatedSession } from "@/utils/serverUtils";
+import Logout from "@/components/Logout"; 
+import { getAuthenticatedSession } from "@/utils/serverUtils"; 
 
 export default async function Sidebar({ children }) {
     const session = await getAuthenticatedSession();
+
+    if (!session) return null;
 
     return (
         <div className="flex h-full disableTextSelection">

@@ -2,7 +2,7 @@ import { getProviders } from "next-auth/react";
 import { redirect } from "next/navigation";
 
 import Signin from "./signin";
-import { getAuthenticatedSession } from "@/utils/serverUtils";
+import { getAuthenticatedSession } from "@/utils/serverUtils"; 
 
 export const metadata = {
     title: 'Sign In - Playlist Assist',

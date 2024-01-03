@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 
 import Card from "./Card";
 import CustomScrollBar from "./CustomScrollBar";
-import styles from "../styles/playlist.module.css";
+import styles from "@/styles/playlist.module.css";
 import UserPlaylists from "./UserPlaylists";
 
 export default function UserLibrary({

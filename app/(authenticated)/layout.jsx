@@ -1,6 +1,6 @@
 import NextAuthProvider from "@/provider/NextAuthProvider";
 
-import "../styles/globals.css"
+import "@/styles/globals.css"
 import Dashboard from "@/components/dashboard/Dashboard";
 
 export const metadata = {

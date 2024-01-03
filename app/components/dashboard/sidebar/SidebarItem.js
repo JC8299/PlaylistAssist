@@ -22,7 +22,8 @@ export default function SidebarItem({ icon, label }) {
                     className="rounded-full w[26px] h-[26px]"
                     src={icon}
                     alt='image'
-                    fill={true}
+                    width={26}
+                    height={26}
                 />
                 // <img
                 //     src={icon}

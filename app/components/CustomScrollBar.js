@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 
-import styles from "../styles/customScrollBar.module.css";
+import styles from "@/styles/customScrollBar.module.css";
 
 function CustomScrollBar({
     children,

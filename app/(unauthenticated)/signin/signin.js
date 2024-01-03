@@ -1,11 +1,7 @@
 'use client'
 
 import Image from "next/image";
-import { useSession, signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-
-import Loader from "@/components/Loader";
+import { signIn } from "next-auth/react";
 
 export default function Signin({
     providers,
@@ -13,7 +9,7 @@ export default function Signin({
     return (
         <div className="bg-black h-screen flex flex-col items-center pt-40 space-y-8">
             <Image
-                src="https://rb.gy/y9mwtb"
+                src="/images/spotify_logo.png"
                 alt="Spotify"
                 height={250}
                 width={600}

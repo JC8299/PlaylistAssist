@@ -1,7 +1,7 @@
-import { getAuthenticatedSession } from '@/utils/serverUtils';
-import { redirect } from 'next/navigation';
+import { getAuthenticatedSession } from "@/utils/serverUtils"; 
+import { redirect } from "next/navigation";
 
-import SearchPanel from '@/components/searchPanel/SearchPanel';
+import SearchPanel from "@/components/searchPanel/SearchPanel"; 
 
 
 export const metadata = {

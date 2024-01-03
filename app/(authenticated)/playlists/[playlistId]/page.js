@@ -1,10 +1,10 @@
-import { getPlaylistById } from "@/app/actions";
-import { getAuthenticatedSession } from "@/utils/serverUtils";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 
-import PlaylistHeader from "../../components/playlist/PlaylistHeader";
-import TrackList from "../../components/TrackList";
+import { getPlaylistById } from "@/actions";
+import { getAuthenticatedSession } from "@/utils/serverUtils";
+import PlaylistHeader from "@/components/playlist/PlaylistHeader";
+import TrackList from "@/components/TrackList";
 
 export async function generateMetadata({ params }) {
     const session = await getAuthenticatedSession();

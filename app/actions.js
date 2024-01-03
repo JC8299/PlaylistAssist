@@ -1,6 +1,6 @@
 'use server'
 
-import { getSpotifyWebApi } from "@/utils/serverUtils";
+import { getSpotifyWebApi } from "./utils/serverUtils"; 
 
 export const getUserPlaylists = async (session) => {
     const data = await getSpotifyWebApi(

@@ -2,7 +2,7 @@
 
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 
-import styles from "../../styles/dashboardPanelLayout.module.css";
+import styles from "@/styles/dashboardPanelLayout.module.css";
 import Box from "../Box";
 
 export default function DashboardPanelLayout({

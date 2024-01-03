@@ -1,6 +1,6 @@
 'use server'
 
-import { getUserPlaylists } from "@/app/actions";
+import { getUserPlaylists } from "@/actions"; 
 import { getAuthenticatedSession } from "@/utils/serverUtils";
 
 import Card from "./Card";

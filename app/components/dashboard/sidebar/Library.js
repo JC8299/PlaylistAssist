@@ -1,9 +1,8 @@
 import { RiPlayListFill } from "react-icons/ri"
-// import { useEffect, useState } from "react";
 
 import LibraryCard from "./LibraryCard";
-import { getAuthenticatedSession } from "@/utils/serverUtils";
-import { getUserPlaylists } from "@/app/actions";
+import { getAuthenticatedSession } from "@/utils/serverUtils"; 
+import { getUserPlaylists } from "@/actions";
 
 export default async function Library() {
     const session = await getAuthenticatedSession();

@@ -31,10 +31,11 @@ export default function LibraryCard({
                         "
                     >
                         <Image
-                            className='rounded-[4px object-cover'
+                            className='rounded-[4px object-cover]'
                             src={imageSrc}
                             alt={imageAlt}
-                            fill={true}
+                            width={48}
+                            height={48}
                         />
                         {/* <img
                             className="rounded-[4px] object-cover"
