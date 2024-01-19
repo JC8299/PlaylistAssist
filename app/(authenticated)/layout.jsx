@@ -1,4 +1,4 @@
-import NextAuthProvider from "@/provider/NextAuthProvider";
+import Providers from "@/provider/Providers";
 
 import "@/styles/globals.css"
 import Dashboard from "@/components/dashboard/Dashboard";
@@ -13,13 +13,13 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <NextAuthProvider>
-                <body>
+            <body>
+                <Providers>
                     <Dashboard>
                         {children}
                     </Dashboard>
-                </body>
-            </NextAuthProvider>
+                </Providers>
+            </body>
         </html>
     )
 }

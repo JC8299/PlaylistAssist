@@ -12,20 +12,55 @@ export const getUserPlaylists = async (session) => {
 }
 
 export const getPlaylistById = async (session, playlistId) => {
-    const data = await getSpotifyWebApi(
-        `https://api.spotify.com/v1/playlists/${playlistId}`,
-        session,
-    )
+    if (!session || !playlistId) return;
+    try {
+        const data = await getSpotifyWebApi(
+            `https://api.spotify.com/v1/playlists/${playlistId}`,
+            session
+        );
 
-    const playlist = data;
+        if (!data) return;
 
-    let currentUrl = data.tracks.next;
+        const playlist = data;
 
-    while (currentUrl !== null) {
-        const nextData = await getSpotifyWebApi(currentUrl, session);
-        playlist.tracks.items.push(...nextData.items);
-        currentUrl = nextData.next;
+        let currentUrl = data.tracks?.next;
+
+        while (currentUrl !== null) {
+            const nextData = await getSpotifyWebApi(currentUrl, session);
+            playlist.tracks.items.push(...nextData.items);
+            currentUrl = nextData.next;
+        }
+
+        return playlist;
+    } catch (e) {
+        console.log(`Error: ${e}`);
+        return;
     }
+}
 
-    return playlist;
+export const getLikedTracks = async (session) => {
+    if (!session) return;
+    try {
+        const data = await getSpotifyWebApi(
+            `https://api.spotify.com/v1/me/tracks?limit=50`,
+            session
+        );
+
+        if (!data) return;
+
+        const tracks = data;
+
+        let currentUrl = data.next;
+
+        while (currentUrl !== null) {
+            const nextData = await getSpotifyWebApi(currentUrl, session);
+            tracks.items.push(...nextData.items);
+            currentUrl = nextData.next;
+        }
+
+        return tracks;
+    } catch (e) {
+        console.log(`Error: ${e}`);
+        return;
+    }
 }

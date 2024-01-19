@@ -1,0 +1,46 @@
+.trackColumns {
+  display: grid;
+  grid-template-columns:
+    16px
+    minmax(120px, 6fr)
+    minmax(120px, 4fr)
+    minmax(120px, 3fr)
+    minmax(120px, 1fr);
+  gap: 16px;
+}
+
+.trackRow {
+  padding: 3px 16px 3px 16px;
+  background: rgba(37, 37, 37, 0);
+  border-radius: 6px;
+  max-height: 54px;
+  color: #a7a7a7;
+}
+
+.trackRow .trackRowOptions {
+  visibility: hidden;
+}
+
+.trackRow:hover {
+  background: rgba(37, 37, 37, 1);
+}
+
+.trackRow:hover .trackRowText {
+  color: white;
+}
+
+.trackRow:hover .trackRowOptions {
+  visibility: visible;
+}
+
+.trackRowHeader {
+  padding: 16px;
+  padding-bottom: 8px;
+  color: #a7a7a7;
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.trackFullRow {
+  grid-column: span 14 / span 14;
+}

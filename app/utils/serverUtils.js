@@ -19,7 +19,7 @@ export async function getSpotifyWebApi(url, session) {
         headers: {
             Authorization: `Bearer ${session.accessToken}`,
         }
-    }).then((res) => res.json());
+    });
 
-    return res;
+    return res.json();
 }

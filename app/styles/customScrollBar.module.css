@@ -20,7 +20,7 @@
   display: block;
   position: absolute;
   width: 12px;
-  right: 0;
+  right: 2px;
   top: 0;
   bottom: 0;
 }
@@ -39,6 +39,7 @@
   background-color: grey;
   transition: opacity 0.5s 0.8s;
   opacity: 0%;
+  z-index: 50;
 }
 
 .customScrollbarThumb.animate,

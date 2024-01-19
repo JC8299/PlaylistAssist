@@ -1,39 +1,24 @@
-import Image from "next/image";
+'use client'
 
-export default function SidebarItem({ icon, label }) {
+import Link from "next/link";
+import { GrHomeRounded } from "react-icons/gr";
+import { LuSearch } from "react-icons/lu";
+
+export default function SidebarItem({
+    path,
+}) {
     return (
-        <div
-            className={`
-                flex
-                flex-row
-                h-auto
-                items-center
-                w-full
-                gap-x-4
-                text-md
-                font-medium
-                transition
-                py-1
-                ${icon ? "text-white" : "hover:text-white text-neutral-400 cursor-pointer" }
-            `}
-        >
-            {icon ? 
-                <Image
-                    className="rounded-full w[26px] h-[26px]"
-                    src={icon}
-                    alt='image'
-                    width={26}
-                    height={26}
-                />
-                // <img
-                //     src={icon}
-                //     alt="image"
-                //     className="rounded-full w-[26px] h-[26px]"
-                // />
-                :
-                <div className="w-[26px]"></div>
-            }
-            <p className="truncate w-full">{label}</p>
-        </div>
+        <Link href={`${path === 'Home' ? '/' : '/search'}`}>
+            <div
+                className="flex flex-row h-auto items-center w-full gap-x-5 text-md font-medium transition py-1 cursor-pointer text-[#a7a7a7] hover:text-[white]"
+            >
+                {path === 'Home' ?
+                    <GrHomeRounded size={24} />
+                    :
+                    <LuSearch size={24} />
+                }
+                <p className="w-full h-[22px] font-bold">{path}</p>
+            </div>
+        </Link>
     )
 }

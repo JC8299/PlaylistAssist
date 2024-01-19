@@ -5,6 +5,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import styles from "@/styles/customScrollBar.module.css";
 
 function CustomScrollBar({
+    contentId,
     children,
 }) {
     const contentRef = useRef(null);
@@ -75,7 +76,7 @@ function CustomScrollBar({
     const scrollToPosition = (targetLocation) => {
         const top = contentRef.current.scrollTop;
         const difference = targetLocation - top;
-        const perTick = difference > 0 ? 30 : -30;
+        const perTick = difference > 0 ? 80 : -80;
 
         scrollIntervalRef.current = setInterval(() => {
             contentRef.current.scrollTop += perTick;
@@ -204,7 +205,7 @@ function CustomScrollBar({
             onMouseLeave={handleMouseLeave}
             onTransitionEnd={handleTransitionEnd}
         >
-            <div className={styles.customScrollbarContent} ref={contentRef}>
+            <div id={contentId} className={styles.customScrollbarContent} ref={contentRef}>
                 {children}
             </div>
             <div className={styles.customScrollbar}>

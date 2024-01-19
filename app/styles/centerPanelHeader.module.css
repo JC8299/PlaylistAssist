@@ -1,0 +1,38 @@
+.header {
+}
+
+.headerBackground {
+  border-radius: 8px 8px 0 0;
+  background-color: #1a1a1a;
+}
+
+.headerButtons {
+  border-radius: 100%;
+  background-color: rgba(0, 0, 0, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  width: 32px;
+}
+
+.headerCenter {
+  transition: opacity 0.5s, visibility 0.5s;
+}
+
+.headerAccount {
+  background-color: rgba(0, 0, 0, 0.54);
+}
+
+.headerAccount:hover {
+  background-color: rgba(0, 0, 0, 0.72);
+  transform: scale(1.04);
+}
+
+.headerAccount:hover .headerAccountItems {
+  transform: scale(calc(1 / 1.04));
+}
+
+.headerBar {
+  transition: opacity 0.1s, visibility 0.1s;
+}

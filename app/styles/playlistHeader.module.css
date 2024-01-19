@@ -1,0 +1,15 @@
+.headerContainer {
+  display: flex;
+  padding: 0px clamp(16px, 100%, 24px) clamp(16px, 100%, 24px)
+    clamp(16px, 100%, 24px);
+}
+
+.headerImage {
+  height: clamp(128px, 100%, 232px);
+  width: clamp(128px, 100%, 232px);
+  aspect-ratio: 1/1;
+  position: relative;
+  border-radius: 4px;
+  margin-right: clamp(16px, 100%, 24px);
+  z-index: 0;
+}

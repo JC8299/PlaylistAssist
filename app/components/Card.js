@@ -21,10 +21,6 @@ function Card({
                         alt={imageAlt}
                         fill={true}
                     />
-                    {/* <img className={styles.cardImage}
-                        src={imageSrc}
-                        alt={imageAlt}
-                    /> */}
                 </div>
                 <div className={styles.cardText}>
                     <p className={styles.cardTitle}>
