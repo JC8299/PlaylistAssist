@@ -34,7 +34,7 @@ export default function TrackList({
             if (diff < 7) {
                 return `${diff} days ago`;
             }
-            return `${diff % 7} weeks ago`;
+            return `${Math.floor(diff/7)} weeks ago`;
         }
 
         const months = [
@@ -158,7 +158,7 @@ export default function TrackList({
                         </div>
 
                         {/* track date added */}
-                        <div>
+                        <div className="flex flex-row items-center">
                             {item.added_at && (
                                 getDateAdded(item.added_at)
                             )}

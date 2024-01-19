@@ -6,13 +6,17 @@ import styles from "@/styles/dashboardPanelLayout.module.css";
 import Box from "../Box";
 
 export default function DashboardPanelLayout({
+    defaultLayout = [15,55,30],
     children,
 }) {
-    // WARNING: Panel defaultSize prop recommended to avoid layout shift after server rendering
+    const onLayout = (sizes) => {
+        document.cookie = `react-resizable-panels:layout=${JSON.stringify(sizes)}`;
+    };
+    
     return (
         <div className="flex flex-row w-full gap-[8px] h-full p-2 justify-stretch">
-            <PanelGroup direction="horizontal">
-                <Panel defaultSize={20}>
+            <PanelGroup direction="horizontal" onLayout={onLayout}>
+                <Panel defaultSize={defaultLayout[0]}>
                     {children[0]}
                 </Panel>
 
@@ -21,7 +25,7 @@ export default function DashboardPanelLayout({
                 </PanelResizeHandle>
                 <div className="w-[3px]" />
 
-                <Panel>
+                <Panel defaultSize={defaultLayout[1]}>
                     <Box className={'h-full flex flex-col'}>
                         {children[1]}
                     </Box>
@@ -33,7 +37,7 @@ export default function DashboardPanelLayout({
                 </PanelResizeHandle>
 
                 {/* TODO: need to add min and max size and collapse the left side */}
-                <Panel defaultSize={20}>
+                <Panel defaultSize={defaultLayout[2]}>
                     {children[2]}
                 </Panel>
             </PanelGroup>

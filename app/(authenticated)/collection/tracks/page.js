@@ -4,7 +4,6 @@ import { LuClock3 } from "react-icons/lu";
 
 import { getLikedTracks } from "@/actions";
 import { getAuthenticatedSession } from "@/utils/serverUtils";
-import PlaylistHeader from "@/components/playlist/PlaylistHeader";
 import TrackList from "@/components/TrackList";
 import CustomScrollBar from "@/components/CustomScrollBar";
 import CenterPanelHeader from "@/components/CenterPanelHeader";

@@ -1,4 +1,5 @@
 import { RiPlayListAddFill } from "react-icons/ri";
+import { cookies } from "next/headers";
 
 import Box from "../Box";
 import Sidebar from "./sidebar/Sidebar";
@@ -7,9 +8,16 @@ import DashboardPanelLayout from "./DashboardPanelLayout";
 export default function Dashboard({
     children,
 }) {
+    const layout = cookies().get('react-resizable-panels:layout');
+
+    let defaultLayout;
+    if (layout) {
+        defaultLayout = JSON.parse(layout.value);
+    }
+
     return (
         <main className="h-[100vh] w-[100vw]">
-            <DashboardPanelLayout>
+            <DashboardPanelLayout defaultLayout={defaultLayout}>
                 <Sidebar />
 
                 <Box className={'h-full flex flex-col'}>
