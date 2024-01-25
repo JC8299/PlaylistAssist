@@ -8,7 +8,7 @@ import TrackList from "@/components/TrackList";
 import CustomScrollBar from "@/components/CustomScrollBar";
 import CenterPanelHeader from "@/components/CenterPanelHeader";
 import styles from "@/styles/trackList.module.css";
-import LikedTracksHeader from "@/components/playlist/LikedTracksHeader";
+import SongsHeader from "@/components/SongsHeader";
 
 export async function generateMetadata() {
     return {
@@ -40,7 +40,7 @@ export default async function LikedTracksPage() {
                     a lot of how I made my page work, so I'll just hard code a new
                     bar under the header.
                 */}
-                <div className={styles.trackColumns + " p-4 text-[#a7a7a7] text-sm font-normal"}>
+                <div className={styles.trackColumnsPlaylist + " p-4 text-[#a7a7a7] text-sm font-normal"}>
                     <div className="justify-self-center">
                         #
                     </div>
@@ -63,14 +63,25 @@ export default async function LikedTracksPage() {
                 </div>
             </CenterPanelHeader>
 
-            {likedTracks && (
+            {/* {likedTracks && (
                 <LikedTracksHeader playlist={likedTracks} />
+            )} */}
+            {likedTracks && (
+                <SongsHeader
+                    imageUrl="/images/liked_cover.jpeg"
+                    imageAlt="Liked Songs"
+                    type="Playlist"
+                    name="Liked Songs"
+                    ownerName={session?.user?.name}
+                    trackAmount={likedTracks.items.length > 0 && (`${likedTracks.total.toLocaleString()} song${likedTracks.total > 1 && 's'}`)}
+                />
             )}
 
             <TrackList
                 tracks={likedTracks?.items
                     .filter((item) => item.track !== null)
                 }
+                playlist={true}
             />
         </CustomScrollBar>
     )

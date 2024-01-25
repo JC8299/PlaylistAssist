@@ -7,15 +7,13 @@ import { LuClock3 } from "react-icons/lu";
 import { FaRegArrowAltCircleRight, FaRegCheckCircle, FaRegCircle } from "react-icons/fa";
 import { IoEllipsisHorizontal } from "react-icons/io5";
 import { LuMusic3 } from "react-icons/lu";
-import { useState } from "react";
 
 import styles from "@/styles/trackList.module.css";
 
 export default function TrackList({
     tracks,
+    playlist = false,
 }) {
-    const [hoverIndex, setHoverIndex] = useState(null);
-
     function msToMinAndSecs(ms) {
         let minutes = Math.floor(ms / 60000);
         let seconds = ((ms % 60000) / 1000).toFixed(0);
@@ -58,7 +56,7 @@ export default function TrackList({
     return (
         <div className="px-[24px]">
             {/* Header */}
-            <div className={`${styles.trackColumns} ${styles.trackRowHeader}`}>
+            <div className={`${playlist ? styles.trackColumnsPlaylist : styles.trackColumns} ${styles.trackRowHeader}`}>
                 <div className="justify-self-center">
                     #
                 </div>
@@ -67,13 +65,17 @@ export default function TrackList({
                     Title
                 </div>
 
-                <div>
-                    Album
-                </div>
+                {playlist && (
+                    <>
+                        <div>
+                            Album
+                        </div>
 
-                <div>
-                    Date Added
-                </div>
+                        <div>
+                            Date Added
+                        </div>
+                    </>
+                )}
 
                 <div className="flex items-center justify-end mr-8">
                     <LuClock3 />
@@ -86,10 +88,8 @@ export default function TrackList({
             <div className={styles.trackFullRow + "mt-2 disableTextSelection"}>
                 {tracks?.map((item, index) => (
                     <div 
-                        className={`${styles.trackColumns} ${styles.trackRow}`}
+                        className={`${styles.trackColumnsPlaylist} ${styles.trackRow}`}
                         key={item.track.id + index + 1}
-                        // onMouseEnter={() => setHoverIndex(index)}
-                        // onMouseLeave={() => setHoverIndex(null)}
                     >
                         {/* check if i want the player in, need to replace this if do */}
                         <div className={styles.trackRowText + " flex items-center justify-self-center"}>
@@ -98,7 +98,8 @@ export default function TrackList({
 
                         <div className="flex flex-row gap-3 items-center">
                             {/* track image */}
-                            <div className="h-[40px] w-[40px] flex-shrink-0">
+                            {playlist && 
+                            (<div className="h-[40px] w-[40px] flex-shrink-0">
                                 {item.track.album.images && item.track.album.images.length > 0 ? (
                                     <Image
                                         src={item.track.album.images?.[0].url}
@@ -115,7 +116,7 @@ export default function TrackList({
                                         />
                                     </div>
                                 )}
-                            </div>
+                            </div>)}
 
                             {/* track name + track description */}
                             {/* need to figure out what to do when track is clicked */}
@@ -147,22 +148,26 @@ export default function TrackList({
                             </div>
                         </div>
 
-                        {/* track album name */}
-                        <div className={styles.trackRowText + " flex items-center truncate"}>
-                            <Link
-                                href={`/albums/${item.track.album.id}`}
-                                className="hover:underline truncate"
-                            >
-                                {item.track.album.name}
-                            </Link>
-                        </div>
+                        {playlist && (
+                            <>
+                                {/* track album name */}
+                                <div className={styles.trackRowText + " flex items-center truncate"}>
+                                    <Link
+                                        href={`/albums/${item.track.album.id}`}
+                                        className="hover:underline truncate"
+                                    >
+                                        {item.track.album.name}
+                                    </Link>
+                                </div>
 
-                        {/* track date added */}
-                        <div className="flex flex-row items-center">
-                            {item.added_at && (
-                                getDateAdded(item.added_at)
-                            )}
-                        </div>
+                                {/* track date added */}
+                                <div className="flex flex-row items">
+                                    {item.added_at && (
+                                        getDateAdded(item.added_at)
+                                    )}
+                                </div>
+                            </>
+                        )}
 
 
                         {/* track added to target playlist */}

@@ -4,7 +4,7 @@ import { LuClock3 } from "react-icons/lu";
 
 import { getPlaylistById } from "@/actions";
 import { getAuthenticatedSession } from "@/utils/serverUtils";
-import PlaylistHeader from "@/components/playlist/PlaylistHeader";
+import SongsHeader from "@/components/SongsHeader";
 import TrackList from "@/components/TrackList";
 import CustomScrollBar from "@/components/CustomScrollBar";
 import CenterPanelHeader from "@/components/CenterPanelHeader";
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }) {
     const playlist = await getPlaylistById(session, playlistId);
 
     return {
-        title: `Playlist Assist - ${playlist.name}`
+        title: `Playlist Assist - ${playlist?.name}`
     }
 }
 
@@ -38,7 +38,7 @@ export default async function PlaylistPage({ params }) {
                         <TbPlayerPlayFilled size={24} className="text-black" />
                     </div>
                     <span>
-                        {playlist.name}
+                        {playlist?.name}
                     </span>
                 </div>
 
@@ -47,7 +47,7 @@ export default async function PlaylistPage({ params }) {
                     a lot of how I made my page work, so I'll just hard code a new
                     bar under the header.
                 */}
-                <div className={styles.trackColumns + " p-4 text-[#a7a7a7] text-sm font-normal"}>
+                <div className={styles.trackColumnsPlaylist + " p-4 text-[#a7a7a7] text-sm font-normal"}>
                     <div className="justify-self-center">
                         #
                     </div>
@@ -70,14 +70,27 @@ export default async function PlaylistPage({ params }) {
                 </div>
             </CenterPanelHeader>
 
-            {playlist && (
+            {/* {playlist && (
                 <PlaylistHeader playlist={playlist} />
+            )} */}
+            {playlist && (
+                <SongsHeader
+                    imageUrl={playlist.images?.length > 0 && playlist.images[0].url}
+                    imageAlt={playlist.name}
+                    type={(playlist.public ? 'Public ' : '') + playlist.type.charAt(0).toUpperCase() + playlist.type.slice(1)}
+                    name={playlist.name}
+                    description={playlist.description}
+                    ownerName={playlist.owner?.display_name}
+                    details={playlist.followers.total > 0 && (playlist.followers.total.toLocaleString() + (playlist.followers.total > 1 ? ' likes' : ' like'))}
+                    trackAmount={playlist.tracks.total > 0 && (`${playlist.tracks.total.toLocaleString()} song${playlist.tracks.total > 1 && 's'}`)}
+                />
             )}
 
             <TrackList 
                 tracks={playlist?.tracks.items
                     .filter((item) => item.track !== null)
                 }
+                playlist={true}
             />
         </CustomScrollBar>
     )

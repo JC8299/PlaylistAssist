@@ -2,6 +2,15 @@
   display: grid;
   grid-template-columns:
     16px
+    minmax(120px, 13fr)
+    minmax(120px, 1fr);
+  gap: 16px;
+}
+
+.trackColumnsPlaylist {
+  display: grid;
+  grid-template-columns:
+    16px
     minmax(120px, 6fr)
     minmax(120px, 4fr)
     minmax(120px, 3fr)
