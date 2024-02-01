@@ -1,23 +1,16 @@
 'use client'
 
 import Image from "next/image";
-import Link from "next/link";
-import { RxDotFilled } from "react-icons/rx";
-import { RiMusic2Line } from "react-icons/ri";
 import { useEffect, useState } from "react";
+import { LuUser2 } from "react-icons/lu";
 
 import styles from "@/styles/songsHeader.module.css";
 
-export default function SongsHeader({
+export default function ArtistHeader({
     imageUrl = '',
     imageAlt = '',
-    type,
     name,
-    description = '',
-    ownerName,
-    ownerId = '',
     details = '',
-    trackAmount,
 }) {
     const [mediumTitleWidth, setMediumTitleWidth] = useState(0);
     const [largeTitleWidth, setLargeTitleWidth] = useState(0);
@@ -113,22 +106,17 @@ export default function SongsHeader({
                             src={imageUrl}
                             alt={imageAlt}
                             fill={true}
-                            className="object-cover rounded"
+                            className="object-cover rounded-full"
                         />
                     </div>
                 ) : (
                     <div className={styles.headerImage + " w-full flex justify-center items-center bg-[#282828] rounded shadow-2xl shadow-black"}>
-                        <RiMusic2Line size={72} className="text-[#a7a7a7]" />
+                        <LuUser2 size={72} className="text-[#a7a7a7]" />
                     </div>
                 )}
 
                 <div className="flex flex-col justify-end font-normal text-sm w-full">
-                    {/* playlist/album type */}
-                    <p>
-                        {type}
-                    </p>
-
-                    {/* playlist/album name */}
+                    {/* artist name */}
                     <div
                         id="headerTextContainer"
                         className="flex flex-row mt-[0.08em] mb-[0.12em] w-full overflow-hidden"
@@ -141,47 +129,14 @@ export default function SongsHeader({
                         </h1>
                     </div>
 
-                    {/* playlist/album description */}
-                    {description && (
-                        <p className="max-h-[74px]">
-                            {description}
-                        </p>
-                    )}
-
-                    {/* playlist owner, followers, amount of tracks */}
-                    {/* album artist, release year, amount of tracks */}
+                    {/* followers */}
                     <div className="flex flex-row items-center mt-[8px] font-normal text-sm flex-wrap">
-                        <span className="disableTextSelection">
-                            {/* No link for 'Various Artists' */}
-                            {ownerId && ownerId !== '0LyfQWJT6nXafLPZqxe9Of' ? (
-                                <Link
-                                    href={`/artists/${ownerId}`}
-                                    className="hover:underline"
-                                >
-                                    {ownerName}
-                                </Link>
-                            ) : (
-                                <>
-                                    {ownerName}
-                                </>
-                            )}
-                        </span>
-
                         {details && (
                             <span className="flex flex-row items-center">
-                                <RxDotFilled />
                                 {details}
                             </span>
                         )}
-
-                        {trackAmount && (
-                            <span className="flex flex-row items-center">
-                                <RxDotFilled />
-                                {trackAmount}
-                            </span>
-                        )}
                     </div>
-                    {/* ignoring owner image and total time because too much work */}
                 </div>
             </div>
         </div>

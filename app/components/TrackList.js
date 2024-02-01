@@ -18,7 +18,7 @@ export default function TrackList({
         let minutes = Math.floor(ms / 60000);
         let seconds = ((ms % 60000) / 1000).toFixed(0);
         return (
-            seconds == 60 ?
+            seconds === 60 ?
             (minutes+1) + ':00' :
             minutes + ':' + (seconds < 10 ? '0' : '') + seconds
         );
@@ -54,7 +54,7 @@ export default function TrackList({
     }
 
     return (
-        <div className="px-[24px]">
+        <div className="px-6">
             {/* Header */}
             <div className={`${playlist ? styles.trackColumnsPlaylist : styles.trackColumns} ${styles.trackRowHeader}`}>
                 <div className="justify-self-center">
@@ -88,7 +88,7 @@ export default function TrackList({
             <div className={styles.trackFullRow + "mt-2 disableTextSelection"}>
                 {tracks?.map((item, index) => (
                     <div 
-                        className={`${styles.trackColumnsPlaylist} ${styles.trackRow}`}
+                        className={`${playlist ? styles.trackColumnsPlaylist : styles.trackColumns} ${styles.trackRow}`}
                         key={item.track.id + index + 1}
                     >
                         {/* check if i want the player in, need to replace this if do */}
@@ -102,7 +102,7 @@ export default function TrackList({
                             (<div className="h-[40px] w-[40px] flex-shrink-0">
                                 {item.track.album.images && item.track.album.images.length > 0 ? (
                                     <Image
-                                        src={item.track.album.images?.[0].url}
+                                        src={item.track.album.images[0].url}
                                         alt={item.track.name}
                                         height={40}
                                         width={40}
@@ -173,7 +173,7 @@ export default function TrackList({
                         {/* track added to target playlist */}
                         {/* combining these two together */}
                         {/* track duration */}
-                        <div className="flex flex-row items-center justify-end gap-[12px]">
+                        <div className="flex flex-row items-center justify-end gap-3">
                             <button className="mr-4">
                                 {index === 0 ? 
                                 <FaRegCircle className="text-[#a7a7a7] hover:text-white"/>

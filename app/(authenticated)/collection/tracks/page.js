@@ -63,9 +63,6 @@ export default async function LikedTracksPage() {
                 </div>
             </CenterPanelHeader>
 
-            {/* {likedTracks && (
-                <LikedTracksHeader playlist={likedTracks} />
-            )} */}
             {likedTracks && (
                 <SongsHeader
                     imageUrl="/images/liked_cover.jpeg"
@@ -73,7 +70,7 @@ export default async function LikedTracksPage() {
                     type="Playlist"
                     name="Liked Songs"
                     ownerName={session?.user?.name}
-                    trackAmount={likedTracks.items.length > 0 && (`${likedTracks.total.toLocaleString()} song${likedTracks.total > 1 && 's'}`)}
+                    trackAmount={likedTracks.items.length > 0 && (`${likedTracks.total.toLocaleString()} song${likedTracks.total > 1 ? 's' : ''}`)}
                 />
             )}
 

@@ -48,7 +48,7 @@ export default async function AlbumPage({
                     a lot of how I made my page work, so I'll just hard code a new
                     bar under the header.
                 */}
-                <div className={"p-4 text-[#a7a7a7] text-sm font-normal grid grid-cols-[16px minmax(120px, 13fr) minmax(120px, 1fr)] gap-4"}>
+                <div className={"p-4 text-[#a7a7a7] text-sm font-normal grid grid-cols-[16px_minmax(120px,13fr)_minmax(120px,1fr)] gap-4"}>
                     <div className="justify-self-center">
                         #
                     </div>
@@ -63,19 +63,16 @@ export default async function AlbumPage({
                 </div>
             </CenterPanelHeader>
             
-            {/* {album && (
-                <AlbumHeader album={album} />
-            )} */}
             {album && (
                 <SongsHeader
                     imageUrl={album.images?.length > 0 && album.images[0].url}
                     imageAlt={album.name}
-                    type={album.album_type.charAt(0).toUpperCase() + album.album_type.slice(1)}
+                    type={album.album_type?.charAt(0).toUpperCase() + album.album_type.slice(1)}
                     name={album.name}
                     ownerName={album.artists[0].name}
                     ownerId={album.artists[0].id}
                     details={(new Date(album.release_date).getFullYear()).toLocaleString()}
-                    trackAmount={album.tracks.total > 0 && (`${album.tracks.total.toLocaleString()} song${album.tracks.total > 1 && 's'}`)}
+                    trackAmount={album.tracks.total > 0 && (`${album.tracks.total.toLocaleString()} song${album.tracks.total > 1 ? 's' : ''}`)}
                 />
             )}
             

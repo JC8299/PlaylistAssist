@@ -1,0 +1,13 @@
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.cardGridHideRows {
+  grid-template-rows: 1fr;
+  grid-auto-rows: 0;
+  padding-bottom: 0;
+  row-gap: 0;
+  overflow: hidden;
+}

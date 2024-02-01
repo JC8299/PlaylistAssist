@@ -70,9 +70,6 @@ export default async function PlaylistPage({ params }) {
                 </div>
             </CenterPanelHeader>
 
-            {/* {playlist && (
-                <PlaylistHeader playlist={playlist} />
-            )} */}
             {playlist && (
                 <SongsHeader
                     imageUrl={playlist.images?.length > 0 && playlist.images[0].url}
@@ -82,7 +79,7 @@ export default async function PlaylistPage({ params }) {
                     description={playlist.description}
                     ownerName={playlist.owner?.display_name}
                     details={playlist.followers.total > 0 && (playlist.followers.total.toLocaleString() + (playlist.followers.total > 1 ? ' likes' : ' like'))}
-                    trackAmount={playlist.tracks.total > 0 && (`${playlist.tracks.total.toLocaleString()} song${playlist.tracks.total > 1 && 's'}`)}
+                    trackAmount={playlist.tracks.total > 0 && (`${playlist.tracks.total.toLocaleString()} song${playlist.tracks.total > 1 ? 's': ''}`)}
                 />
             )}
 

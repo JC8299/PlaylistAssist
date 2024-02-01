@@ -30,7 +30,7 @@ export default async function Library() {
                             imageSrc={'/images/liked_cover.jpeg'}
                             imageAlt={'Liked Songs Image'}
                             title={'Liked Songs'}
-                            description={`${likedTracks.total.toLocaleString()} songs`}
+                            description={`${likedTracks?.total.toLocaleString()} songs`}
                             link={'/collection/tracks'}
                             key={'LikedSongs'}
                         />

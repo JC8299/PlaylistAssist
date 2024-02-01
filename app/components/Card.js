@@ -1,18 +1,20 @@
-import Image from 'next/image';
+import Image from "next/image";
+import Link from "next/link";
 
-import styles from '@/styles/card.module.css';
+import styles from "@/styles/card.module.css";
 
-function Card({
+export default function Card({
     imageSrc,
     imageAlt,
     title,
     description,
-    buttonText,
     link,
-    width
 }) {
     return (
-        <div className={styles.cardContainer+' disableTextSelection'} style={{maxWidth: `${width}px`}}>
+        <Link
+            className={`${styles.cardContainer} disableTextSelection`}
+            href={link}
+        >
             <div className={styles.cardContent}>
                 <div className={styles.cardImageContainer}>
                     <Image
@@ -31,8 +33,6 @@ function Card({
                     </p>
                 </div>
             </div>
-        </div>
+        </Link>
     )
 }
-
-export default Card;

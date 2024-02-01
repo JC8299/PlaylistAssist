@@ -88,7 +88,6 @@ export default function CenterPanelHeader({
                                             width={24}
                                         />
                                     ) : (
-                                        // check this if this is ok
                                         <LuUser2 className="rounded-full h-6 w-6" />
                                     )}
                                 </div>
@@ -115,7 +114,7 @@ export default function CenterPanelHeader({
                 </Dropdown>
             </div>
 
-            {children.length > 1 ? (
+            {children[1] ? (
                 <div className={styles.headerBar + ` flex flex-row items-center absolute top-[100%] bg-[#1a1a1a] h-[36px] w-full px-6 border-y border-[#252525] ${scrollHeaderBar ? "visible opacity-100" : "invisible opacity-0"}`}>
                     {children[1]}
                 </div>
@@ -123,5 +122,5 @@ export default function CenterPanelHeader({
                 <></>
             )}
         </div>
-    )
+    );
 }

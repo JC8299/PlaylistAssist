@@ -95,7 +95,6 @@ export default function UserLibrary({
                             imageAlt='Playlist Image'
                             title={playlist.name}
                             description={`${playlist.owner ? playlist.owner : ''}`}
-                            buttonText='Card Link'
                             link=''
                             key={playlist.id}
                             width={cardWidth}

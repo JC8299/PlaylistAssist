@@ -1,11 +1,11 @@
 .cardContainer {
-  flex-grow: 1;
+  flex: 1 1 160px;
   background-color: #181818;
-  min-width: 150px;
   padding: 16px;
   transition: background-color ease 0.3s;
   border-radius: 6px;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .cardContainer:hover {
@@ -33,7 +33,6 @@
   object-fit: cover;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
   height: 100%;
 }
 
